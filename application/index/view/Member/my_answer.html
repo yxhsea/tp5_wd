@@ -1,0 +1,75 @@
+<include file="Public/head"/>
+	<link rel="stylesheet" href="__CSS__/member.css" />
+	<script type="text/javascript" src='__JS__/member.js'></script>
+<style type="text/css">
+.page {
+	width: 748px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+}
+.page strong{
+	margin-left: 3px;
+	padding: 5px 8px;
+	border: 1px solid #ccc;
+}
+.page a{
+	margin-left: 3px;
+	padding: 5px 8px;
+	border: 1px solid #ccc;
+}
+</style>
+</head>
+<body>
+	<!-- top -->
+	<include file="Public/top"/>
+	<!-- top结束 -->
+<!--------------------中部-------------------->
+	<div id='center'>
+<!-- 左侧 -->
+<include file="Public/left"/>
+<!-- 左侧结束 -->
+		<div id='right'>
+			<p class='title'>{$rank}的回答</p>
+			<ul class='ask-filter'>
+				<li <if condition = "$_GET['where'] eq null">class='cur'</if>><a href="__APP__/Member/my_answer/uid/{$Think.get.uid}">全部回答</a></li>
+				<li <if condition = "$_GET['where'] eq 1">class='cur'</if>><a href="__APP__/Member/my_answer/uid/{$Think.get.uid}/where/1">被采纳的回答</a></li>
+			</ul>
+			<div class='list list-filter'>
+				<table>
+						<if condition = "count($showAnswer) eq 0">
+							<tr height='140'>
+							<if condition = "$_GET['where'] eq null">
+								<td>{$rank}还没有回答过问题</td>
+							</if>
+							<if condition = "$_GET['where'] eq 1">
+								<td>{$rank}还没有被采纳的回答</td>
+							</if>
+							</tr>
+						<else/>
+							<tr>
+								<th class='t1'>标题</th>
+								<th>回答</th>
+								<th class='t3'>更新时间</th>
+							</tr>
+							<foreach name="showAnswer" item="showAnswer">
+								<tr>
+									<td class='t1'>
+										<a href="__APP__/Show/index/asid/{$showAnswer.asid}/cid/{$showAnswer.cid}">{$showAnswer.content}</a><span>&nbsp;&nbsp;[{$showAnswer.title}]</span>
+									</td>
+									<td>{$showAnswer.answer}</td>
+									<td class='t3'>{$showAnswer.time|date="Y-m-d",###}</td>
+								</tr>
+							</foreach>
+						</if>
+				</table>
+				<div class="page">
+					{$Page}
+				</div>
+			</div>
+		</div>
+	</div>
+<!--------------------中部结束-------------------->
+<!-- 底部 -->
+<inclede file="Public/foot"/>
+<!-- 底部结束 -->

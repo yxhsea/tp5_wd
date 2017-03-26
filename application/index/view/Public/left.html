@@ -1,0 +1,54 @@
+<div id='left'>
+		<div class='userinfo'>
+			<dl>
+				<dt>
+					<a href="__APP__/Member/index/uid/{$leftInfo.uid}"><img src="__PUBLIC__/{$leftInfo.face}" width='48' height='48' alt="占位符"/></a>
+				</dt>
+				<dd class='username'>
+					<a href="__APP__/Member/index/uid/{$leftInfo.uid}"><b>{$leftInfo.username}</b>
+					</a>
+					<a href="">
+						<i class='level lv{$leftInfo.lv}' title='Level {$leftInfo.lv}'></i>
+					</a>
+				</dd>
+				<dd>金币：<a href="" style="color: #888888;"><b class='point'>{$leftInfo.point}</b></a></dd>
+				<dd>经验值：{$leftInfo.exp}</dd>
+			</dl>
+			<table>
+				<tr>
+					<td>回答数</td>
+					<td>采纳率</td>
+					<td class='last'>提问数</td>
+				</tr>
+				<tr>
+					<td><a href="">{$leftInfo.answer}</a></td>
+					<td><a href="">{$leftInfo.ratio}%</a></td>
+					<td class='last'><a href="">{$leftInfo.ask}</a></td>
+				</tr>
+			</table>
+		</div>
+
+	<ul>
+		<li class='myhome <if condition = "(ACTION_NAME) eq index">cur</if>'>
+			<a href="__APP__/Member/index/uid/{$leftInfo.uid}">{$rank}的首页</a>
+		</li>
+		<li class='myask <if condition = "(ACTION_NAME) eq my_ask">cur</if>'>
+			<a href="__APP__/Member/my_ask/uid/{$leftInfo.uid}">{$rank}的提问</a>
+		</li>
+		<li class='myanswer <if condition = "(ACTION_NAME) eq my_answer">cur</if>'>
+			<a href="__APP__/Member/my_answer/uid/{$leftInfo.uid}">{$rank}的回答</a>
+		</li>
+		<li class='mylevel <if condition = "(ACTION_NAME) eq my_level">cur</if>'>
+			<a href="__APP__/Member/my_level/uid/{$leftInfo.uid}">{$rank}的等级</a>
+		</li>
+		<li class='mygold <if condition = "(ACTION_NAME) eq my_gold">cur</if>'>
+			<a href="__APP__/Member/my_gold/uid/{$leftInfo.uid}">{$rank}的金币</a>
+		</li>
+		<if condition = "$_GET['uid'] eq $_SESSION['uid']">
+			<li class='myface <if condition = "(ACTION_NAME) eq my_face">cur</if>'>
+				<a href="__APP__/Member/my_face/uid/{$leftInfo.uid}">上传头像</a>
+			</li>
+		</if>
+		<li style="background:none"></li>
+	</ul>
+</div>

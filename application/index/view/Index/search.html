@@ -1,0 +1,38 @@
+<include file="Public/head"/>
+	<link rel="stylesheet" href="__CSS__/index.css" />
+</head>
+<body>
+	<!-- 搜索顶部 -->
+	<div class="search_top">
+		<div class="sealeft">
+			<a href="__APP__/Index/index"><img src="__IMAGES__/t0150f9b7bd1b41d84e.png" alt="" /></a>
+			<a href="http://www.xtu.edu.cn/" target='_blank'>湘潭大学</a>
+			<a href="http://www.sky31.com/" target='_blank'>湘潭大学三翼校园</a>
+		</div>
+
+	</div>
+	<!-- 搜索顶部结束 -->
+	<!-- 搜索框 -->
+	<div class="search_box">
+		<form action="__APP__/Index/search" method='post'>
+			<input type="text" name="searcon" class="searchInput"/>
+			<input type="submit" value="搜索答案" class="sub"/>
+		</form>
+			<a href="__APP__/Ask/ask">我要提问</a>
+	</div>
+	<!-- 搜索框结束 -->
+	<!-- 搜索内容 -->
+	<div class="searcont">
+		<foreach name="info" item="info">
+			<ul>
+				<li> <a href="__APP__/Show/index/asid/{$info.asid}/cid/{$info.cid}" class="title">{$info.acontent}</a> </li>
+				<li>{$info.content}...</li>
+				<li class="time"><span>{$info.title} - {$info.answer}个回答</span> - 提问时间: {$info.time|date="Y-m-d",###}</li>
+			</ul>
+		</foreach>
+	</div>
+	<!-- 搜索内容结束 -->
+
+<!-- 底部 -->
+<include file="Public/foot"/>
+<!-- 底部结束 -->

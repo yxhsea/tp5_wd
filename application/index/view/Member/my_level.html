@@ -1,0 +1,70 @@
+<include file="Public/head"/>
+	<link rel="stylesheet" href="__CSS__/member.css" />
+	<script type="text/javascript" src='__Js__/member.js'></script>
+</head>
+<body>
+	<!-- top -->
+<include file="Public/top"/>
+<!-- top结束 -->
+<!--------------------中部-------------------->
+	<div id='center'>
+<!-- 左侧 -->
+<include file="Public/left"/>
+<!-- 左侧结束 -->
+
+		<div id='right'>
+			<p class='title'>{$rank}的等级</p>
+			<p class='lv-info'>恭喜您，已经升到 <span>Lv{$level}</span> 级啦，距下一级还需 <span>{$nextExp}</span> 经验值!</p>
+			<div class='lv-rule'>
+				<p><span>等级规则</span></p>
+				<table class='lv-exp'>
+					<tr>
+						<th>等级</th>
+						<th>经验值</th>
+					</tr>				
+					<foreach name="levelExp" item="levelExp" key="k">
+						<if condition = "$k eq $level">
+							<tr class="cur">
+								<td >{$rank}的现在<span>{$level}</span>级</td>
+								<td><span>{$exp}</span></td>
+							</tr>
+						<else/>
+							<tr>
+								<td>{$k}</td>
+								<td>{$levelExp}</td>
+							</tr>
+						</if>
+					</foreach>
+				</table>
+			</div>
+			<div class='lv-rule'>
+				<p><span>经验获取规则</span></p>
+				<table class='lv-exp'>
+					<tr>
+						<th>操作</th>
+						<th>获得经验值</th>
+					</tr>
+					<tr>
+						<td>每天登录</td>
+						<td>{$Think.config.LV_LOGIN}</td>
+					</tr>
+					<tr>
+						<td>提问</td>
+						<td>{$Think.config.LV_ASK}</td>
+					</tr>
+					<tr>
+						<td>回答</td>
+						<td>{$Think.config.LV_ANSWER}</td>
+					</tr>
+					<tr>
+						<td>采纳与被采纳</td>
+						<td>{$Think.config.LV_ACCEPT}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+<!--------------------中部结束-------------------->
+<!-- 底部 -->
+<include file="Public/foot"/>
+<!-- 底部结束 -->

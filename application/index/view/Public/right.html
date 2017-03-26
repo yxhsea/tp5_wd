@@ -1,0 +1,102 @@
+		<div id='right'>
+		<if condition = "isset($_SESSION['uid']) && isset($_SESSION['username'])">
+			<div class='userinfo'>
+				<dl>
+					<dt>
+						<a href="__APP__/Member/index/uid/{$userInfo.uid}"><img src="__PUBLIC__/{$userInfo.face}" width='48' height='48' alt="占位符"/></a>
+					</dt>
+					<dd class='username'>
+						<a href="__APP__/Member/index/uid/{$userInfo.uid}">
+							<b>{$userInfo.username}</b>
+						</a>
+						<a href="">
+							<i class='level lv{$userInfo.lv}' title='Level 1'></i>
+						</a>
+					</dd>
+					<dd>金币：<a href="" style="color: #888888;">{$userInfo.point}<b class='point'></b></a></dd>
+					<dd>经验值：{$userInfo.exp}</dd>
+				</dl>
+				<table>
+					<tr>
+						<td>回答数</td>
+						<td>采纳率</td>
+						<td class='last'>提问数</td>
+					</tr>
+					<tr>
+						<td><a href="">{$userInfo.answer}</a></td>
+						<td><a href="">{$userInfo.ratio}%</a></td>
+						<td class='last'><a href="">{$userInfo.ask}</a></td>
+					</tr>
+				</table>
+				<ul>
+					<li><a href="__APP__/Member/my_ask/uid/{$Think.session.uid}">我提问的</a></li>
+					<li><a href="__APP__/Member/my_answer/uid/{$Think.session.uid}">我回答的</a></li>
+				</ul>
+			</div>
+		<else/>
+			 <div class='r-login'>
+				<span class='login'><i></i>&nbsp;登录</span>
+				<span class='register'><i></i>&nbsp;注册</span>
+			</div>
+		</if>
+	<div class='clear'></div>
+	<div class='star'>
+		<p class='title'>湘大问答之星</p>
+		<span class='star-name'>本日回答问题最多的人</span>
+			<if condition = "$eveStar neq null">
+				<div class='star-info'>
+					<div>
+						<a href="__APP__/Member/index/uid/{$eveStar.uid}" class='star-face'>
+							<img src="__PUBLIC__/{$eveStar.face}" width='48px' height='48px' alt="头像站位"/>
+						</a>
+						<ul>
+							<li><a href="__APP__/Member/index/uid/{$eveStar.uid}">{$eveStar.username}</a></li>
+							<i class='level lv{$eveStar.lv}' title='Level 1'></i>
+						</ul>
+					</div>
+					<ul class='star-count'>
+						<li>回答数：<span>{$eveStar.answer}</span></li>
+						<li>采纳率：<span>{$eveStar.ratio}%</span></li>
+					</ul>
+				</div>
+			<else/>
+				<div class='star-info' style="text-align: center;">
+				今日还无问答之星
+				</div>
+			</if>
+		<span class='star-name'>历史回答问题最多的人</span>
+
+		<div class='star-info'>
+			<div>
+				<a href="__APP__/Member/index/uid/{$hisStar.uid}" class='star-face'>
+					<img src="__PUBLIC__/{$hisStar.face}" width='48px' height='48px' alt="头像站位"/>
+				</a>
+				<ul>
+					<li><a href="__APP__/Member/index/uid/{$hisStar.uid}">{$hisStar.username}</a></li>
+					<i class='level lv{$hisStar.lv}' title='Level 1'></i>
+				</ul>
+			</div>
+			<ul class='star-count'>
+				<li>回答数：<span>{$hisStar.answer}</span></li>
+				<li>采纳率：<span>{$hisStar.ratio}%</span></li>
+			</ul>
+		</div>
+	</div>
+	<div class='star-list'>
+		<p class='title'>湘大问答助人光荣榜</p>
+		<div>
+			<ul class='ul-title'>
+				<li>用户名</li>
+				<li style='text-align:right;'>帮助过的人数</li>
+			</ul>
+			<ul class='ul-list'>
+				<foreach name="helper" item="helper" key="k">
+					<li>
+						<a href="__APP__/Member/index/uid/{$helper.uid}"><i class='rank r{$k+1}'></i>{$helper.username}</a>
+						<span>{$helper.accept}</span>
+					</li>		
+				</foreach>	
+			</ul>
+		</div>
+	</div>
+</div>

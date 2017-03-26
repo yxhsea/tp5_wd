@@ -236,4 +236,7 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    //加载扩展配置文件
+    'extra_config_list' => ['webconfig'],
 ];

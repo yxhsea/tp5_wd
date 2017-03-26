@@ -1,0 +1,122 @@
+<include file="Public/head"/>
+	<link rel="stylesheet" href="__CSS__/question.css" />
+	<script type="text/javascript" src="__JS__/question.js"></script>
+</head>
+<body>
+	<!-- top -->
+	<include file="Public/top"/>
+	<!-- top 结束-->
+	<div id='location'>
+		<a href="">全部分类</a>
+			<foreach name="fathercate" item="fcate" key="k">
+				<if condition="$k neq $len">
+					&gt;&nbsp;<a href="">{$fcate.title}</a>&nbsp;&nbsp;
+				<else/>
+					&gt;&nbsp;{$fcate.title}&nbsp;&nbsp;		
+				</if>
+			</foreach>
+	</div>
+
+<!--------------------中部-------------------->
+	<div id='center-wrap'>
+		<div id='center'>
+			<div id='left'>
+				<div id='answer-info'>
+					<!-- 如果没有解决用wait -->
+					<div class='ans-state <if condition="$ask['solve'] eq 0">wait</if>'></div>
+					<div class='answer'>
+						<p class='ans-title'>{$ask.content}
+							<b class='point'>{$ask.reward}</b>
+						</p>
+					</div>
+					<ul>
+						<li><a href="__APP__/Member/index/uid/{$ask.uid}">{$ask.username}</a></li>
+						<li><i class='level lv{$lv}' title='Level {$lv}'></i></li>
+						<li>{$ask.time|date='Y-m-d H:i:s',###}</li>
+				
+					</ul>
+					<if condition="isset($_SESSION['username']) && isset($_SESSION['uid']) && $ask['solve'] eq 0 && $_SESSION['uid'] neq $ask['uid']">
+						<div class='ianswer'>
+							<form action="__APP__/Show/answer" method='POST'>
+								<p>我来回答</p>
+								<textarea name="content"></textarea>
+								<input type="hidden" name='asid' value='{$ask.asid}'/>
+								<input type="submit" value='提交回答' id='anw-sub'/>
+							</form>
+						</div>
+					</if>
+					<!-- 满意回答 -->
+					<if condition="$answerOk['accept'] eq 1">
+						<div class='ans-right'>
+							<p class='title'><i></i>满意回答<span></span></p>
+							<p class='ans-cons'>{$answerOk.content}</p>
+							<dl>
+								<dt>
+									<a href="__APP__/Member/index/uid/{$answerOk.uid}"><img src="__PUBLIC__/{$faceOk}" width='48' height='48'/></a>
+								</dt>
+								<dd>
+									<a href="__APP__/Member/index/uid/{$answerOk.uid}">{$answerOk.username}</a>
+								</dd>
+								<dd><i class='level lv{$alv}'></i></dd>
+								<dd>{$ratio}%</dd>
+							</dl>
+						</div>
+					</if>
+					<!-- 满意回答 -->
+				</div>
+
+				<div id='all-answer'>
+					<div class='ans-icon'></div>
+					<p class='title'>共 <strong>{$count}</strong> 条回答</p>
+					<ul>
+					    <foreach name="answer" item="answer">
+								<li>
+									<div class='face'>
+										<a href="__APP__/Member/index/uid/{$answer.uid}">
+											<img src="__PUBLIC__/{$answer.face}" width='48' height='48'/>
+										</a>
+										<a href="__APP__/Member/index/uid/{$answer.uid}">{$answer.username}</a>
+									</div>
+									<div class='cons blue'>
+										<p>{$answer.content}<span style='color:#888;font-size:12px'>&nbsp;&nbsp;({$answer.time|date="Y-m-d H:i:s",###})</span></p>
+									</div>
+									<if condition="$_SESSION['uid'] eq $ask['uid']">
+										<if condition="$answer.accept eq 0">
+											<a href="__APP__/Show/accept/anid/{$answer.anid}/asid/{$answer.asid}/uid/{$answer.uid}" class='adopt-btn'>采纳</a>
+										<else/>
+											<a href="" class='adopt-btn'>已采纳</a>
+										</if>
+									</if>
+								</li>
+						</foreach>
+					</ul>
+					<div class='page'>
+						{$page}
+					</div>
+				</div>
+				<div id='other-ask'>
+					<p class='title'>待解决的相关问题</p>
+					<table>
+						<foreach name="alike" item="alike">
+							<tr>
+								<td class='t1'><a href="__APP__/Show/index/asid/{$alike.asid}/cid/{$alike.cid}">{$alike.content}</a></td>
+								<td>{$alike.answer}&nbsp;回答</td>
+								<td>{$alike.time|date='Y-m-d',###}</td>
+							</tr>
+						</foreach>
+					</table>
+				</div>
+			</div>
+		<!-- 右侧 -->
+		<include file="Public/right"/>
+		<!-- ---右侧结束---- -->
+			
+		</div>
+
+	</div>
+	
+<!--------------------中部结束-------------------->
+
+<!-- 底部 -->
+<include file="Public/foot"/>
+<!-- 底部结束 -->
