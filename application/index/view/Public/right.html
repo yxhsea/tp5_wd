@@ -1,5 +1,5 @@
 		<div id='right'>
-		<if condition = "isset($_SESSION['uid']) && isset($_SESSION['username'])">
+		{if condition = "isset($_SESSION['uid']) && isset($_SESSION['username'])"}
 			<div class='userinfo'>
 				<dl>
 					<dt>
@@ -33,12 +33,12 @@
 					<li><a href="__APP__/Member/my_answer/uid/{$Think.session.uid}">我回答的</a></li>
 				</ul>
 			</div>
-		<else/>
+		{else/}
 			 <div class='r-login'>
 				<span class='login'><i></i>&nbsp;登录</span>
 				<span class='register'><i></i>&nbsp;注册</span>
 			</div>
-		</if>
+		{/if}
 	<div class='clear'></div>
 	<div class='star'>
 		<p class='title'>湘大问答之星</p>
@@ -90,12 +90,12 @@
 				<li style='text-align:right;'>帮助过的人数</li>
 			</ul>
 			<ul class='ul-list'>
-				<foreach name="helper" item="helper" key="k">
+				{volist name="helper" id="helper" key="k"}
 					<li>
 						<a href="__APP__/Member/index/uid/{$helper.uid}"><i class='rank r{$k+1}'></i>{$helper.username}</a>
 						<span>{$helper.accept}</span>
 					</li>		
-				</foreach>	
+				{/volist}
 			</ul>
 		</div>
 	</div>

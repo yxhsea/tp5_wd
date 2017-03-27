@@ -69,7 +69,7 @@ class Index extends Common{
         //$info = M()->query($sql);
         $this->assign('info',$info);
 
-        return $this->display();
+        return $this->fetch();
         //$this->display();
     }
 }

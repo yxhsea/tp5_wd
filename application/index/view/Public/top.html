@@ -5,17 +5,17 @@
 			<li><a href="http://www.sky31.com/" target='_blank'>湘潭大学三翼校园</a></li>
 		</ul>
 		<ul class='top-bar-right fr'>
-			<if condition="isset($_SESSION['username'])&&isset($_SESSION['uid'])">
+			{if condition="isset($_SESSION['username'])&&isset($_SESSION['uid'])"}
 	 			<li class='userinfo'>
 					<a href="__APP__/Member/index/uid/{$Think.session.uid}" class='uname'>{$Think.session.username}</a>
 				</li>
 				<li style='color:#eaeaf1'>|</li>
 				<li><a href="__APP__/Login/out">退出</a></li> 
-			<else/>
+			{else/}
 				<li><a href="" class='login'>登录</a></li>
 				<li style='color:#eaeaf1'>|</li>
 				<li><a href="" class='register'>注册</a></li>	
-			</if>
+			{/if}
 		</ul>
 	</div>
 <!-- 提问搜索框 -->
@@ -37,11 +37,11 @@
 		<li class='nav-sel ask-cate'>
 			<a href="" class='ask-list'><span>问题库</span><i></i></a>
 			<ul class='hidden'>
-				<foreach name="topcate" item="topcate">
+				{volist name="topcate" id="topcate"}
 					<li>
 						<a href="__APP__/List/index/cid/{$topcate.cid}">{$topcate.title}</a>
 					</li>
-				</foreach>
+				{/volist}
 			</ul>
 		</li>
 	</ul>

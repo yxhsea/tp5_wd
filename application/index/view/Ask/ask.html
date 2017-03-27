@@ -1,20 +1,20 @@
-<include file="Public/head"/>
+{include file="Public/head"/}
 	<link rel="stylesheet" href="__CSS__/ask.css" />
 	<script type="text/javascript">
 		var on = false;
 		var point = 0;
-		on = <if condition = "isset($_SESSION['username']) && isset($_SESSION['uid'])">				
+		on = {if condition = "isset($_SESSION['username']) && isset($_SESSION['uid'])"}
 				true;
 				point = {$point};
-			<else/>
-				false;
-			</if>
+			 {else/}
+					false;
+			 {/if}
 	</script>
 	<script type="text/javascript" src="__JS__/ask.js"></script>
 </head>
 <body>
 	<!-- top -->
-	<include file="Public/top"/>
+	{include file="Public/top"/}
 	<!-- top结束 -->
 	<div id='location'>
 		<a href="">湘大问答</a>&nbsp;>&nbsp;提问
@@ -65,9 +65,9 @@
 		<div class='sel'>
 			<p>为您的问题选择一个合适的分类：</p>
 			<select name="cate-one" size='16'>
-				<foreach name="cate" item="cate">
+				{volist name="cate" id="cate"}
 					<option value="{$cate.cid}">{$cate.title}</option>
-				</foreach>
+				{/volist}
 			</select>
 			<select name="cate-one" size='16' class='hidden'></select>
 			<select name="cate-one" size='16' class='hidden'></select>
@@ -79,5 +79,5 @@
 <!--------------------中部结束-------------------->
 
 <!-- 底部 -->
-<include file="Public/foot"/>
+{include file="Public/foot"/}
 <!-- 底部结束 -->

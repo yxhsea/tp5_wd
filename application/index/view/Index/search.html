@@ -1,4 +1,4 @@
-<include file="Public/head"/>
+{include file="Public/head"/}
 	<link rel="stylesheet" href="__CSS__/index.css" />
 </head>
 <body>
@@ -23,16 +23,16 @@
 	<!-- 搜索框结束 -->
 	<!-- 搜索内容 -->
 	<div class="searcont">
-		<foreach name="info" item="info">
+		{volist name="info" id="info"}
 			<ul>
 				<li> <a href="__APP__/Show/index/asid/{$info.asid}/cid/{$info.cid}" class="title">{$info.acontent}</a> </li>
 				<li>{$info.content}...</li>
 				<li class="time"><span>{$info.title} - {$info.answer}个回答</span> - 提问时间: {$info.time|date="Y-m-d",###}</li>
 			</ul>
-		</foreach>
+		{/volist}
 	</div>
 	<!-- 搜索内容结束 -->
 
 <!-- 底部 -->
-<include file="Public/foot"/>
+{include file="Public/foot"/}
 <!-- 底部结束 -->
