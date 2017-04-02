@@ -1,15 +1,15 @@
-<include file="Public/head"/>
+{include file="Public/head"/}
 	<link rel="stylesheet" href="__CSS__/member.css" />
 	<script type="text/javascript" src='__Js__/member.js'></script>
 </head>
 <body>
 	<!-- top -->
-<include file="Public/top"/>
+{include file="Public/top"/}
 <!-- top结束 -->
 <!--------------------中部-------------------->
 	<div id='center'>
 <!-- 左侧 -->
-<include file="Public/left"/>
+{include file="Public/left"/}
 <!-- 左侧结束 -->
 
 		<div id='right'>
@@ -22,19 +22,19 @@
 						<th>等级</th>
 						<th>经验值</th>
 					</tr>				
-					<foreach name="levelExp" item="levelExp" key="k">
-						<if condition = "$k eq $level">
+					{volist name="levelExp" id="levelExp" key="k"}
+						{if condition = "$k eq $level"}
 							<tr class="cur">
 								<td >{$rank}的现在<span>{$level}</span>级</td>
 								<td><span>{$exp}</span></td>
 							</tr>
-						<else/>
+						{else/}
 							<tr>
 								<td>{$k}</td>
 								<td>{$levelExp}</td>
 							</tr>
-						</if>
-					</foreach>
+						{/if}
+					{/volist}
 				</table>
 			</div>
 			<div class='lv-rule'>
@@ -66,5 +66,5 @@
 	</div>
 <!--------------------中部结束-------------------->
 <!-- 底部 -->
-<include file="Public/foot"/>
+{include file="Public/foot" /}
 <!-- 底部结束 -->

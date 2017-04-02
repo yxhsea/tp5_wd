@@ -1,4 +1,4 @@
-<include file="Public/head"/>
+{include file="Public/head"/}
 	<link rel="stylesheet" href="__CSS__/member.css" />
 	<script type="text/javascript" src='__JS__/member.js'></script>
 <style type="text/css">
@@ -22,37 +22,37 @@
 </head>
 <body>
 	<!-- top -->
-	<include file="Public/top"/>
+	{include file="Public/top"/}
 	<!-- top结束 -->
 <!--------------------中部-------------------->
 	<div id='center'>
 <!-- 左侧 -->
-<include file="Public/left"/>
+{include file="Public/left"/}
 <!-- 左侧结束 -->
 		<div id='right'>
 			<p class='title'>{$rank}的提问</p>
 			<ul class='ask-filter'>
-				<li <if condition = "($_GET['where'] eq 0) or ($_GET['where'] eq null)">class='cur'</if>><a href="__APP__/Member/my_ask/uid/{$Think.get.uid}/where/0">待解决问题</a></li>
-				<li <if condition = "($_GET['where'] eq 1)">class='cur'</if>><a href="__APP__/Member/my_ask/uid/{$Think.get.uid}/where/1">已解决问题</a></li>
+				<li {if condition = "($_GET['where'] eq 0) or ($_GET['where'] eq null)">class='cur'{/if}><a href="__APP__/Member/my_ask/uid/{$Think.get.uid}/where/0">待解决问题</a></li>
+				<li {if condition = "($_GET['where'] eq 1)">class='cur'{/if}><a href="__APP__/Member/my_ask/uid/{$Think.get.uid}/where/1">已解决问题</a></li>
 			</ul>
 			<div class='list list-filter'>
 				<table>
-					<if condition = "count($Ask) eq 0">
+					{if condition = "count($Ask) eq 0"}
 						<tr height='140'>
-						    <if condition = "($_GET['where'] eq 0) or ($_GET['where'] eq null)">
+						    {if condition = "($_GET['where'] eq 0) or ($_GET['where'] eq null)"}
 							<td>你还没有待解决的提问</td>
-							</if>
-							<if condition = "($_GET['where'] eq 1)">
+							{/if}
+							{if condition = "($_GET['where'] eq 1)"}
 							<td>你还没有已解决的提问</td>
-							</if>
+							{/if}
 						</tr>
-					<else/>
+					{else/}
 						<tr>
 							<th class='t1'>标题</th>
 							<th>回答数</th>
 							<th class='t3'>更新时间</th>
 						</tr>
-						<foreach name="Ask" item="Ask">
+						{volist name="Ask" id="Ask"}
 							<tr>
 								<td class='t1'>
 									<a href="__APP__/Show/index/asid/{$Ask.asid}/cid/{$Ask.cid}">{$Ask.content}</a><span>&nbsp;&nbsp;[{$Ask.title}]</span>
@@ -60,7 +60,7 @@
 								<td>{$Ask.answer}</td>
 								<td class='t3'>{$Ask.time|date="Y-m-d",###}</td>
 							</tr>
-						</foreach>
+						{/volist}
 					</if>
 				</table>
 				<div class="page">
@@ -71,5 +71,5 @@
 	</div>
 <!--------------------中部结束-------------------->
 <!-- 底部 -->
-<include file="Public/foot"/>
+{include file="Public/foot"/}
 <!-- 底部结束 -->

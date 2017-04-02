@@ -1,24 +1,24 @@
-<include file="Public/head"/>
+{include file="Public/head"/}
 	<link rel="stylesheet" href="__CSS__/member.css" />
 	<script type="text/javascript" src='__JS__/member.js'></script>
 </head>
 <body>
 	<!-- top -->
-<include file="Public/top"/>
+{include file="Public/top"/}
 <!-- top结束 -->
 <!--------------------中部-------------------->
 	<div id='center'>
 <!-- 左侧 -->
-<include file="Public/left"/>
+{include file="Public/left"/}
 <!-- 左侧结束 -->
 		<div id='right'>
 			<p class='title'>{$rank}的金币</p>
 			<p class='lv-info'>
-					<if condition = "$point eq 0">
-					您还没有金币，赶紧向着高富帅去奋斗吧！
-					<else/>
-					您现有金币<span>{$point}</span>
-					</if>
+					{if condition = "$point eq 0"}
+						您还没有金币，赶紧向着高富帅去奋斗吧！
+					{else/}
+						您现有金币<span>{$point}</span>
+					{/if}
 			</p>
 			<div class='lv-rule'>
 				<p><span>金币获取</span></p>
@@ -53,5 +53,5 @@
 	</div>
 <!--------------------中部结束-------------------->
 <!-- 底部 -->
-<include file="Public/foot">/
+{include file="Public/foot" /}
 <!-- 底部结束 -->
