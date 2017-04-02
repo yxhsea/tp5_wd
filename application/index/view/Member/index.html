@@ -20,53 +20,53 @@
 				<li>采纳率：<span>{$leftInfo.ratio}%</span></li>
 			</ul>
 			<div class='list'>
-				<p><span>{$rank}的提问 <b>(共{$leftInfo.ask}条)</b></span><a href="__APP__/Member/my_ask/uid/{$leftInfo.uid}">更多>></a></p>
+				<p><span>{$rank}的提问 <b>(共{$leftInfo.ask}条)</b></span><a href="{:url('Member/my_ask',['uid'=>$leftInfo['uid']])}">更多>></a></p>
 				<table>
-					<if condition = "$leftInfo['ask'] eq 0">
+					{if condition = "$leftInfo['ask'] eq 0"}
 						<tr height='140'>
 							<td>你还没有进行过提问</td>
 						</tr>
-					<else/>
+					{else/}
 						<tr>
 							<th class='t1'>标题</th>
 							<th>回答数</th>
 							<th class='t3'>更新时间</th>
 						</tr>
-						<foreach name="askShow" item="askShow">
+						{volist name="askShow" id="askShow"}
 							<tr>
 								<td class='t1'>
-									<a href="__APP__/Show/index/asid/{$askShow.asid}cid/{$askShow.cid}">{$askShow.content}</a><span>&nbsp;&nbsp;[{$askShow.title}]</span>
+									<a href="{:url('Show/index',['asid'=>$askShow['asid'],'cid'=>$askShow['cid']])}">{$askShow.content}</a><span>&nbsp;&nbsp;[{$askShow.title}]</span>
 								</td>
 								<td>{$askShow.answer}</td>
 								<td class='t3'>{$askShow.time|date="Y-m-d",###}</td>
 							</tr>
-						</foreach>
-					</if>
+						{/foreach}
+					{/if}
 				</table>
 			</div>
 			<div class='list'>
-				<p><span>{$rank}的回答 <b>(共{$leftInfo.answer}条)</b></span><a href="__APP__/Member/my_answer/uid/{$leftInfo.uid}">更多>></a></p>
+				<p><span>{$rank}的回答 <b>(共{$leftInfo.answer}条)</b></span><a href="{:url('Member/my_answer',['uid'=>$leftInfo['uid']])}">更多>></a></p>
 				<table>
-					  <if condition = "$leftInfo['answer'] eq 0">
+					  {if condition = "$leftInfo['answer'] eq 0"}
 							<tr height='140'>
 								<td>你还没有进行过回答</td>
 							</tr>
-	                  <else/>
+	                  {else/}
 							<tr>
 								<th class='t1'>标题</th>
 								<th>回答</th>
 								<th class='t3'>更新时间</th>
 							</tr>
-						<foreach name="answerShow" item="answerShow">
+						{volist name="answerShow" id="answerShow"}
 							<tr>
 								<td class='t1'>
-									<a href="__APP__/Show/index/asid/{$answerShow.asid}/cid/{$answerShow.cid}">{$answerShow.content}</a><span>&nbsp;&nbsp;[{$answerShow.title}]</span>
+									<a href="{:url('Show/index',['asid'=>$answerShow['asid'],'cid'=>$answerShow['cid']])}">{$answerShow.content}</a><span>&nbsp;&nbsp;[{$answerShow.title}]</span>
 								</td>
 								<td>{$answerShow.answer}</td>
 								<td class='t3'>{$answerShow.time|date="Y-m-d",###}</td>
 							</tr>
-						</foreach>
-	 				  </if>
+						{/volist}
+	 				  {/if}
 				</table>
 			</div>
 		</div>

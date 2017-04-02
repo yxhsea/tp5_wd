@@ -32,8 +32,8 @@
 		<div id='right'>
 			<p class='title'>{$rank}的回答</p>
 			<ul class='ask-filter'>
-				<li <if condition = "$_GET['where'] eq null">class='cur'</if>><a href="__APP__/Member/my_answer/uid/{$Think.get.uid}">全部回答</a></li>
-				<li <if condition = "$_GET['where'] eq 1">class='cur'</if>><a href="__APP__/Member/my_answer/uid/{$Think.get.uid}/where/1">被采纳的回答</a></li>
+				<li <if condition = "$_GET['where'] eq null">class='cur'</if>><a href="{:url('Member/my_answer',['uid'=>$Think.get.uid}])}">全部回答</a></li>
+				<li <if condition = "$_GET['where'] eq 1">class='cur'</if>><a href="{:url('Member/my_answer',['uid'=>$Think.get.uid,'where'=>1])}">被采纳的回答</a></li>
 			</ul>
 			<div class='list list-filter'>
 				<table>
@@ -55,7 +55,7 @@
 							{volist name="showAnswer" id="showAnswer"}
 								<tr>
 									<td class='t1'>
-										<a href="__APP__/Show/index/asid/{$showAnswer.asid}/cid/{$showAnswer.cid}">{$showAnswer.content}</a><span>&nbsp;&nbsp;[{$showAnswer.title}]</span>
+										<a href="{:url('Show/index',['asid'=>$showAnswer['asid'],'cid'=>$showAnswer['cid']])}">{$showAnswer.content}</a><span>&nbsp;&nbsp;[{$showAnswer.title}]</span>
 									</td>
 									<td>{$showAnswer.answer}</td>
 									<td class='t3'>{$showAnswer.time|date="Y-m-d",###}</td>

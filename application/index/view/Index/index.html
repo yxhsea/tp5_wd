@@ -13,10 +13,10 @@
 				{volist name="allcate" id="allcate"}
 				<li class='list-l1'>
 					<div class='list-l1-wrap'>
-						<h4><a href="__APP__/List/index/cid/{$allcate.cid}">{$allcate.title}</a></h4>
+						<h4><a href="{:url('List/index',['cid'=>$allcate['cid']])}">{$allcate.title}</a></h4>
 						<ul class='list-l2'>
 							{volist name="allcate['down']" id="down" offset="0" length="3"}
-							<li><a href="__APP__/List/index/cid/{$down.cid}">{$down.title}</a></li>
+							<li><a href="{:url('List/index',['cid'=>$down['cid']])}">{$down.title}</a></li>
 							{/volist}
 						</ul>
 					</div>
@@ -24,7 +24,7 @@
 					<div class='list-more hidden'>
 						<ul>
 							{volist name="allcate['down']" id="down" offset="3"}
-							<li><a href="__APP__/List/index/cid/{$down.cid}">{$down.title}</a></li>
+							<li><a href="{:url('List/index',['cid'=>$down['cid']])}">{$down.title}</a></li>
 							{/volist}
 						</ul>
 					</div>
@@ -62,7 +62,7 @@
 				</dt>
 				{volist name="noSolvel" id="no"}
 					<dd>
-						<a href="__APP__/Show/index/asid/{$no.asid}/cid/{$no.cid}">{$no.content}</a>
+						<a href="{:url('Show/index',['asid'=>$no['asid'],'cid'=>$no['cid']])}">{$no.content}</a>
 						<span>{$no.answer}回答</span>
 					</dd>
 				{/volist}
@@ -75,7 +75,7 @@
 				</dt>
 				{volist name="noSolvelH" id="noH"}
 					<dd>
-						<a href="__APP__/Show/index/asid/{$noH.asid}/cid/{$noH.cid}"><b>{$noH.reward}</b>{$noH.content}</a>
+						<a href="{:url('Show/index',['asid'=>$noH['asid'],'cid'=>$noH['cid']])}"><b>{$noH.reward}</b>{$noH.content}</a>
 						<span>{$noH.answer}回答</span>
 					</dd>
 				{/volist}

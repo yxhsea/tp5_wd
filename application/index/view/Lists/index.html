@@ -7,10 +7,10 @@
 	<!-- top 结束-->
 
 	<div id='location'>
-		<a href="__APP__/List/index/cid/0">全部分类</a>
+		<a href="{:url('List/index',['cid'=>0])}">全部分类</a>
 			{volist name="fathercate" id="fcate" key="k"}
 				<if condition="$k neq $count">
-					&gt;&nbsp;<a href="__APP__/List/index/cid/{$fcate.cid}">{$fcate.title}</a>&nbsp;&nbsp;
+					&gt;&nbsp;<a href="{:url('List/index',['cid'=>$fcate['cid']])}">{$fcate.title}</a>&nbsp;&nbsp;
 				<else/>
 					&gt;&nbsp;{$fcate.title}&nbsp;&nbsp;
 				</if>
@@ -25,7 +25,7 @@
 				<ul>
 					{volist name="sonCate" id="sonCate"}
 						<li>
-							<a href="__APP__/List/index/cid/{$sonCate.cid}">{$sonCate.title}</a>
+							<a href="{:url('List/index',['cid'=>$sonCate['cid']])}">{$sonCate.title}</a>
 						</li>
 					{/volist}
 				</ul>
@@ -33,16 +33,16 @@
 			<div id='answer-list'>
 				<ul class='ans-sel'>
 					<li {if condition="$_GET['where'] eq 0"}class='on'{/if} >
-						<a href="__APP__/List/index/where/0/">待解决问题</a>
+						<a href="{:url('List/index',['where'=>0])}">待解决问题</a>
 					</li>
 					<li {if condition="$_GET['where'] eq 1"}class='on'{/if} >
-						<a href="__APP__/List/index/where/1/">已解决</a>
+						<a href="{:url('List/index',['where'=>1])}">已解决</a>
 					</li>
 					<li {if condition="$_GET['where'] eq 2"}class='on'{/if} >
-						<a href="__APP__/List/index/where/2/">高悬赏</a>
+						<a href="{:url('List/index',['where'=>2])}">高悬赏</a>
 					</li>
 					<li {if condition="$_GET['where'] eq 3"}class='on'{/if} >
-						<a href="__APP__/List/index/where/3/">零回答</a>
+						<a href="{:url('List/index',['where'=>3])}">零回答</a>
 					</li>
 				</ul>
 				<!-- 待解决问题 -->
@@ -55,7 +55,7 @@
 						{volist name="ask" id="ask"}
 							<tr>
 								<td class='t1 cons'>
-									<a href="__APP__/Show/index/asid/{$ask.asid}/cid/{$ask.cid}">
+									<a href="{:url('Show/index',['asid'=>$ask['asid'],'cid'=>$ask['cid']])}">
 										<b>{$ask.reward}</b>{$ask.content}</a>&nbsp;&nbsp;[{$ask.title}]
 								</td>
 								<td>{$ask.answer}</td>
