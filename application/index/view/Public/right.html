@@ -3,10 +3,10 @@
 			<div class='userinfo'>
 				<dl>
 					<dt>
-						<a href="__APP__/Member/index/uid/{$userInfo.uid}"><img src="__PUBLIC__/{$userInfo.face}" width='48' height='48' alt="占位符"/></a>
+						<a href="{:url('Member/index',['uid'=>$userInfo['uid']])}"><img src="__PUBLIC__/{$userInfo.face}" width='48' height='48' alt="占位符"/></a>
 					</dt>
 					<dd class='username'>
-						<a href="__APP__/Member/index/uid/{$userInfo.uid}">
+						<a href="{:url('Member/index',['uid'=>$userInfo['uid']])}">
 							<b>{$userInfo.username}</b>
 						</a>
 						<a href="">
@@ -29,8 +29,8 @@
 					</tr>
 				</table>
 				<ul>
-					<li><a href="__APP__/Member/my_ask/uid/{$Think.session.uid}">我提问的</a></li>
-					<li><a href="__APP__/Member/my_answer/uid/{$Think.session.uid}">我回答的</a></li>
+					<li><a href="{:url('Member/my_ask',['uid'=>$Think.session.uid])}">我提问的</a></li>
+					<li><a href="{:url('Member/my_answer',['uid'=>$Think.session.uid])}">我回答的</a></li>
 				</ul>
 			</div>
 		{else/}
@@ -46,11 +46,11 @@
 			<if condition = "$eveStar neq null">
 				<div class='star-info'>
 					<div>
-						<a href="__APP__/Member/index/uid/{$eveStar.uid}" class='star-face'>
+						<a href="{:url('Member/index',['uid'=>$eveStar['uid']])}" class='star-face'>
 							<img src="__PUBLIC__/{$eveStar.face}" width='48px' height='48px' alt="头像站位"/>
 						</a>
 						<ul>
-							<li><a href="__APP__/Member/index/uid/{$eveStar.uid}">{$eveStar.username}</a></li>
+							<li><a href="{:url('Member/index',['uid'=>$eveStar['uid']])}">{$eveStar.username}</a></li>
 							<i class='level lv{$eveStar.lv}' title='Level 1'></i>
 						</ul>
 					</div>
@@ -68,11 +68,11 @@
 
 		<div class='star-info'>
 			<div>
-				<a href="__APP__/Member/index/uid/{$hisStar.uid}" class='star-face'>
+				<a href="{:url('Member/index',['uid'=>$hisStar['uid']])}" class='star-face'>
 					<img src="__PUBLIC__/{$hisStar.face}" width='48px' height='48px' alt="头像站位"/>
 				</a>
 				<ul>
-					<li><a href="__APP__/Member/index/uid/{$hisStar.uid}">{$hisStar.username}</a></li>
+					<li><a href="{:url('Member/index',['uid'=>$hisStar['uid']])}">{$hisStar.username}</a></li>
 					<i class='level lv{$hisStar.lv}' title='Level 1'></i>
 				</ul>
 			</div>
@@ -92,7 +92,7 @@
 			<ul class='ul-list'>
 				{volist name="helper" id="helper" key="k"}
 					<li>
-						<a href="__APP__/Member/index/uid/{$helper.uid}"><i class='rank r{$k+1}'></i>{$helper.username}</a>
+						<a href="{:url('Member/index',['uid'=>$helper['uid']])}"><i class='rank r{$k+1}'></i>{$helper.username}</a>
 						<span>{$helper.accept}</span>
 					</li>		
 				{/volist}
