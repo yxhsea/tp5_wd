@@ -7,10 +7,10 @@
 		<ul class='top-bar-right fr'>
 			{if condition="isset($_SESSION['username'])&&isset($_SESSION['uid'])"}
 	 			<li class='userinfo'>
-					<a href="__APP__/Member/index/uid/{$Think.session.uid}" class='uname'>{$Think.session.username}</a>
+					<a href="{:url('Member/index',['uid'=>$Think.session.uid])}" class='uname'>{$Think.session.username}</a>
 				</li>
 				<li style='color:#eaeaf1'>|</li>
-				<li><a href="__APP__/Login/out">退出</a></li> 
+				<li><a href="{:url('Login/out')}">退出</a></li>
 			{else/}
 				<li><a href="" class='login'>登录</a></li>
 				<li style='color:#eaeaf1'>|</li>
@@ -21,11 +21,11 @@
 <!-- 提问搜索框 -->
 	<div id='search'>
 		<div class='logo'><a href="" class='logo'></a></div>
-		<form action="__APP__/Index/search" method='post'>
+		<form action="{:url('Index/search')}" method='post'>
 			<input type="text" name='searcon' class='sech-cons'/>
 			<input type="submit" class='sech-btn'/>
 		</form>
-		<a href="__APP__/Ask/ask" target='_blank' class='ask-btn'></a>
+		<a href="{:url('Ask/ask')}" target='_blank' class='ask-btn'></a>
 	</div>
 <!-- 提问搜索框结束 -->
 </div>
@@ -33,13 +33,13 @@
 <!----------导航条---------->
 <div id='nav'>
 	<ul class='list'>
-		<li class='nav-sel'><a href="__APP__/Index/index" class='home'>问答首页</a></li>
+		<li class='nav-sel'><a href="{:url('Index/index')}" class='home'>问答首页</a></li>
 		<li class='nav-sel ask-cate'>
 			<a href="" class='ask-list'><span>问题库</span><i></i></a>
 			<ul class='hidden'>
 				{volist name="topcate" id="topcate"}
 					<li>
-						<a href="__APP__/List/index/cid/{$topcate.cid}">{$topcate.title}</a>
+						<a href="{:url('List/index',['cid'=>$topcate['cid']])}">{$topcate.title}</a>
 					</li>
 				{/volist}
 			</ul>
@@ -64,7 +64,7 @@
 				</div>
 			</div>
 			<div class='reg-right'>
-				<form action="__APP__/Reg/register" method='post' name='register'>
+				<form action="{:url('Reg/register')}" method='post' name='register'>
 					<ul>
 						<li>
 							<label for="reg-uname">用户名</label>
@@ -84,7 +84,7 @@
 						<li>
 							<label for="reg-verify">验证码</label>
 							<input type="text" name='verify' id='reg-verify'/>
-							<img src="__APP__/Reg/code" width='99' height='35' alt="验证码" id='verify-img' onclick="this.src='__APP__/Reg/code?code='+Math.random();"/>
+							<img src="{:url('Reg/code')}" width='99' height='35' alt="验证码" id='verify-img' onclick="this.src='{:url('Reg/code')}?code='+Math.random();"/>
 							<span>请输入图中的字母或数字，不区分大小写</span>
 						</li>
 						<li class='submit'>
@@ -105,7 +105,7 @@
 		<div class='login-form'>
 			<span id='login-msg'></span>
 			<!-- 登录FORM -->
-			<form action="__APP__/Login/login" method='post' name='login'>
+			<form action="{:url('Login/login')}" method='post' name='login'>
 				<ul>
 					<li>
 						<label for="login-acc">用户名</label>
