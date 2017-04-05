@@ -18,7 +18,7 @@ class Show extends Common{
         $this->assign_data();
 
         //接受cid
-        $cid = Request::instance()->get('cid');
+        $cid = Request::instance()->param('cid');
         //$cid = I('get.cid');
         $cate = db::name('category')->select();
         //$cate = M('category')->select();
@@ -30,7 +30,7 @@ class Show extends Common{
         $this->assign('fathercate',array_reverse($father));
 
         //获得用户名和经验值
-        $asid = Request::instance()->get('asid');
+        $asid = Request::instance()->param('asid');
         //$asid = I('get.asid');
         $ask = db::name('ask')->alias('a')->join('wd_user u','a.uid = u.uid')->where(array('asid'=>$asid))->find();
         //$ask = D('ask')->relation('User')->where(array('asid'=>$asid))->find();
@@ -47,18 +47,19 @@ class Show extends Common{
         $count = count($answerDb);
 
         //数据分页显示
-        $Page = new \Think\Page($count,5);
-        $show = $Page->show();
+        //$Page = new \Think\Page($count,5);
+        //$show = $Page->show();
 
-        $answer = db::name('answer')->where(array('asid'=>$asid))->order('time desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $answer = db::name('answer')->alias('w')->join('wd_user u','w.uid = u.uid')->where(array('asid'=>$asid))->order('time desc')->paginate(10);
         //$answer = D('answer')->relation(true)->where(array('asid'=>$asid))->order('time desc')->limit($Page->firstRow.','.$Page->listRows)->select();
         $this->assign('count',$count);;
         $this->assign('answer',$answer);
-        $this->assign('page',$show);
+        $this->assign('page',$answer->render());
 
         //满意回答信息
-        $answerOk = db::name('answer')->where(array('asid'=>$asid,'accept'=>1))->find();
+        $answerOk = db::name('answer')->alias('w')->join('wd_ask a','w.asid = a.asid')->join('wd_user u','w.uid = u.uid')->where(array('w.asid'=>$asid,'w.accept'=>1))->find();
         //$answerOk = D('answer')->relation(true)->where(array('asid'=>$asid,'accept'=>1))->find();
+
         $this->assign('answerOk',$answerOk);
 
         //回答者的等级
@@ -68,11 +69,11 @@ class Show extends Common{
         $this->assign('faceOk',$this->face($answerOk));
 
         //采纳率
-        $Aaccept = db::name('user')->where(array('uid'=>$answerOk['uid']))->getField('accept');
+        $Aaccept = db::name('user')->where(array('uid'=>$answerOk['uid']))->field('accept')->find();
         //$Aaccept = M('user')->where(array('uid'=>$answerOk['uid']))->getField('accept');
         $answerOk['uaccept'] = $Aaccept;
-        $this->assign('ratio',$this->ratio($answerOk));
 
+        $this->assign('ratio',$this->ratio($answerOk));
 
         //相关问题
         $where = array(
@@ -84,7 +85,9 @@ class Show extends Common{
         //$alike = M('ask')->where($where)->order('time desc')->limit(5)->select();
         $this->assign('alike',$alike);
 
-        $this->display();
+
+        return $this->fetch();
+        //$this->display();
     }
 
     //回答问题
@@ -117,9 +120,9 @@ class Show extends Common{
 
     //采纳回答
     public function accept(){
-        $anid = Request::instance()->get('anid');
-        $asid = Request::instance()->get('asid');
-        $uid  = Request::instance()->get('uid');
+        $anid = Request::instance()->param('anid');
+        $asid = Request::instance()->param('asid');
+        $uid  = Request::instance()->param('uid');
 
         db::name('answer')->where(array('anid'=>$anid))->update(array('accept'=>1));
         //M('answer')->where(array('anid'=>$anid))->save(array('accept'=>1));

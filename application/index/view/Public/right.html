@@ -43,7 +43,7 @@
 	<div class='star'>
 		<p class='title'>湘大问答之星</p>
 		<span class='star-name'>本日回答问题最多的人</span>
-			<if condition = "$eveStar neq null">
+			{if condition = "$eveStar neq null"}
 				<div class='star-info'>
 					<div>
 						<a href="{:url('Member/index',['uid'=>$eveStar['uid']])}" class='star-face'>
@@ -59,11 +59,11 @@
 						<li>采纳率：<span>{$eveStar.ratio}%</span></li>
 					</ul>
 				</div>
-			<else/>
+			{else/}
 				<div class='star-info' style="text-align: center;">
 				今日还无问答之星
 				</div>
-			</if>
+			{/if}
 		<span class='star-name'>历史回答问题最多的人</span>
 
 		<div class='star-info'>

@@ -18,7 +18,7 @@ class Lists extends Common{
         $this->assign_data();
 
         //获得父级分类
-        $cid = Request::instance()->get('cid');
+        $cid = Request::instance()->param('cid');
         //$cid = I('get.cid');
 
         $cate = db::name('category')->select();
@@ -40,7 +40,7 @@ class Lists extends Common{
         $this->assign('sonCate',$sonCate);
 
 
-        $where = Request::instance()->get('where');
+        $where = Request::instance()->param('where');
         //$where = I('get.where');
         if(isset($where) && $where < 4){
             $condition = $where;
@@ -62,12 +62,11 @@ class Lists extends Common{
                 break;
         }
         if($cid != 0){
-            $where['cid'] = $cid;
+            $where['a.cid'] = $cid;
         }
         //$field = 'reward,content,answer,time,asid,wd_ask.cid';
         $Cask = db::name('ask')->alias('a')->join('wd_category c','a.cid = c.cid')->where($where)->select();
         //$Cask = D('ask')->relation('Category')->where($where)->select();
-
         //数据分页
         //$count = count($Cask);
         //$Page = new \Think\Page($count,1);

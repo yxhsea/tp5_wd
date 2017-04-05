@@ -80,7 +80,7 @@ class Common extends Controller{
 
     //采纳率换算
     public function ratio($user){
-        if(!empty($user) && $user['answer']){
+        if(!empty($user) && !empty($user['answer'])){
             $num = round($user['uaccept'] / $user['answer'],4);
             $ratio = $num * 100;
         }else{

@@ -39,7 +39,7 @@
 			<ul class='hidden'>
 				{volist name="topcate" id="topcate"}
 					<li>
-						<a href="{:url('List/index',['cid'=>$topcate['cid']])}">{$topcate.title}</a>
+						<a href="{:url('Lists/index',['cid'=>$topcate['cid'],'where'=>0])}">{$topcate.title}</a>
 					</li>
 				{/volist}
 			</ul>

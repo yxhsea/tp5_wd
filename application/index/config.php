@@ -10,6 +10,7 @@ return [
     'view_replace_str' => [
         '__JS__'     => '/tp5_wd/public/static/index/Js',
         '__CSS__'    => '/tp5_wd/public/static/index/Css',
-        '__IMAGES__' => '/tp5_wd/public/static/index/Images'
+        '__IMAGES__' => '/tp5_wd/public/static/index/Images',
+        '__PUBLIC__' => '/tp5_wd/public/static'
     ]
 ];
