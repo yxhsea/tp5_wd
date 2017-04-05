@@ -26,9 +26,10 @@ class Member extends Common{
     //我的首页
     public function index(){
         //我的提问列表展示
-        $uid = Request::instance()->get('uid');
+        $uid = Request::instance()->param('uid');
+        $this->assign('uid',$uid);
         //$uid = I('get.uid');
-        $askShow = db::name('ask')->alias('a')->join('wd_category c','a.cid = c.uid')->where(['uid'=>$uid])->order('time desc')->limit(10)->select();
+        $askShow = db::name('ask')->alias('a')->join('wd_category c','a.cid = c.cid')->where(['uid'=>$uid])->order('time desc')->limit(10)->select();
         //$askShow = D('ask')->relation('Category')->where(array('uid'=>$uid))->order('time desc')->limit(10)->select();
         $this->assign('askShow',$askShow);
 
@@ -61,7 +62,8 @@ class Member extends Common{
 
     //用户左侧信息
     private function _left_info(){
-        $uid = Request::instance()->get('uid');
+        $uid = Request::instance()->param('uid');
+        $this->assign('uid',$uid);
         //$uid = I('get.uid');
         $leftInfo = db::name('user')->where(['uid'=>$uid])->find();
         //$leftInfo = M('user')->where(array('uid'=>$uid))->find();
@@ -76,27 +78,29 @@ class Member extends Common{
         }
 
         //第三人称
-        $rank = isset(Request::instance()->session('uid')) && (Request::instance()->session('uid') == $uid) ? '我' : 'TA';
+        $temp = Request::instance()->session('uid');
+        $rank = isset($temp) && ($temp) ? '我' : 'TA';
         //$rank = isset($_SESSION['uid']) && ($_SESSION['uid'] == $uid) ? '我' : 'TA';
+
         $this->assign('rank',$rank);
     }
 
     //我的提问
     public function my_ask(){
-        $uid = Request::instance()->get('uid');
+        $uid = Request::instance()->param('uid');
         //$uid = I('get.uid');
-        $where = Request::instance()->get('where');
+        $where = Request::instance()->param('where');
         //$where = I('get.where');
 
         if($where == 0 || $where == null){
             //待解决问题的条件
-            $arr = array('uid'=>$uid,'solve'=>0);
+            $arr = array('a.uid'=>$uid,'a.solve'=>0);
         }elseif ($where == 1) {
             //已解决问题的条件
-            $arr = array('uid'=>$uid,'solve'=>1);
+            $arr = array('a.uid'=>$uid,'a.solve'=>1);
         }
         //记录的条数
-        $count = db::name('ask')->where($arr)->count();
+        $count = db::name('ask')->alias('a')->where($arr)->count();
         //$count = M('ask')->where($arr)->count();
         //数据分页显示
         //$Page = new \Think\Page($count,5);
@@ -111,6 +115,7 @@ class Member extends Common{
 
         $this->assign('Ask',$Ask);
         $this->assign('Page',$show);
+        $this->assign('uid',$uid);
 
         return $this->fetch();
         //$this->display();
@@ -118,9 +123,9 @@ class Member extends Common{
 
     //我的回答
     public function my_answer(){
-        $uid = Request::instance()->get('uid');
+        $uid = Request::instance()->param('uid');
         //$uid = I('get.uid');
-        $where = Request::instance()->get('where');
+        $where = Request::instance()->param('where');
         //$where = I('get.where');
         if($where == 1){
             $where = 'and wd_answer.accept = 1 ';
@@ -131,8 +136,8 @@ class Member extends Common{
         //数据分页显示
         $count = db::name('answer')->where($arr)->count();
         //$count = M('answer')->where($arr)->count();
-        $Page = new \Think\Page($count,5);
-        $show = $Page->show();
+        //$Page = new \Think\Page($count,5);
+        //$show = $Page->show();
 
         //我的回答列表展示
         $sql = "select 
@@ -152,12 +157,13 @@ class Member extends Common{
 					wd_answer.uid = ".$uid." ".$where."
 				order by
 					wd_answer.time desc
-				limit 
-					".$Page->firstRow.','.$Page->listRows;
+                ";
         $showAnswer = Db::query($sql);
 
         $this->assign('showAnswer',$showAnswer);
-        $this->assign('Page',$show);
+        //$this->assign('Page',$show);
+
+        $this->assign('uid',$uid);
 
         return $this->fetch();
         //$this->display();
@@ -165,7 +171,8 @@ class Member extends Common{
 
     //我的等级
     public function my_level(){
-        $uid = Request::instance()->get('uid');
+        $uid = Request::instance()->param('uid');
+        $this->assign('uid',$uid);
         //$uid = I('get.uid');
         $user = db::name('user')->where(['uid'=>$uid])->find();
         //$user = M('user')->where(array('uid'=>$uid))->find();
@@ -189,11 +196,15 @@ class Member extends Common{
 
     //我的金币
     public function my_gold(){
-        $uid = Request::instance()->get('uid');
+        $uid = Request::instance()->param('uid');
+        $this->assign('uid',$uid);
+
         //$uid = I('get.uid');
         $point = db::name('user')->where(['uid'=>$uid])->field('point')->find();
         //$point = M('user')->where(array('uid'=>$uid))->getField('point');
-        $this->assign('point',$point);
+
+        $this->assign('point',$point['point']);
+
         return $this->fetch();
         //$this->display();
     }
@@ -201,6 +212,7 @@ class Member extends Common{
     //我的头像
     public function my_face(){
         $uid = Request::instance()->get('uid');
+        $this->assign('uid',$uid);
         //$uid = I('get.uid');
         if(IS_POST){
             $upload = new \Think\Upload();									// 实例化上传类

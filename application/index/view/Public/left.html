@@ -27,25 +27,24 @@
 				</tr>
 			</table>
 		</div>
-
 	<ul>
-		<li class='myhome {if condition = "(ACTION_NAME) eq index"}cur{/if}'>
+		<li class='myhome {if condition = "($Request.action) eq 'index'"} cur {/if}'>
 			<a href="{:url('Member/index',['uid'=>$leftInfo['uid']])}">{$rank}的首页</a>
 		</li>
-		<li class='myask {if condition = "(ACTION_NAME) eq my_ask"}cur{/if}'>
+		<li class='myask {if condition = "($Request.action) eq 'my_ask'"}cur{/if}'>
 			<a href="{:url('Member/my_ask',['uid'=>$leftInfo['uid']])}">{$rank}的提问</a>
 		</li>
-		<li class='myanswer {if condition = "(ACTION_NAME) eq my_answer"}cur{/if}'>
+		<li class='myanswer {if condition = "($Request.action) eq 'my_answer'"}cur{/if}'>
 			<a href="{:url('Member/my_answer',['uid'=>$leftInfo['uid']])}">{$rank}的回答</a>
 		</li>
-		<li class='mylevel {if condition = "(ACTION_NAME) eq my_level"}cur{/if}'>
+		<li class='mylevel {if condition = "($Request.action) eq 'my_level'"}cur{/if}'>
 			<a href="{:url('Member/my_level',['uid'=>$leftInfo['uid']])}">{$rank}的等级</a>
 		</li>
-		<li class='mygold {if condition = "(ACTION_NAME) eq my_gold"}cur{/if}'>
+		<li class='mygold {if condition = "($Request.action) eq 'my_gold'"}cur{/if}'>
 			<a href="{:url('Member/my_gold',['uid'=>$leftInfo['uid']])}">{$rank}的金币</a>
 		</li>
-		{if condition = "$_GET['uid'] eq $_SESSION['uid']"}
-			<li class='myface {if condition = "(ACTION_NAME) eq my_face"}cur{/if}'>
+		{if condition = "$uid eq $Think.session.uid"}
+			<li class='myface {if condition = "($Request.action) eq 'my_face'"}cur{/if}'>
 				<a href="{:url('Member/my_face',['uid'=>$leftInfo['uid']])}">上传头像</a>
 			</li>
 		{/if}

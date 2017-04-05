@@ -32,17 +32,17 @@
 		<div id='right'>
 			<p class='title'>{$rank}的提问</p>
 			<ul class='ask-filter'>
-				<li {if condition = "($_GET['where'] eq 0) or ($_GET['where'] eq null)">class='cur'{/if}><a href="{:url('Member/my_ask',['uid'=>$Think.get.uid,'where'=>0])}">待解决问题</a></li>
-				<li {if condition = "($_GET['where'] eq 1)">class='cur'{/if}><a href="{:url('Member/my_ask',['uid'=>$Think.get.uid,'where'=>1])}">已解决问题</a></li>
+				<li {if condition = "($Think.get.where eq 0) or ($Think.get.where eq null)" } class='cur' {/if} ><a href="{:url('Member/my_ask',['uid'=>$uid,'where'=>0])}">待解决问题</a></li>
+				<li {if condition = "($Think.get.where eq 1)"} class='cur'{/if}><a href="{:url('Member/my_ask',['uid'=>$uid,'where'=>1])}">已解决问题</a></li>
 			</ul>
 			<div class='list list-filter'>
 				<table>
 					{if condition = "count($Ask) eq 0"}
 						<tr height='140'>
-						    {if condition = "($_GET['where'] eq 0) or ($_GET['where'] eq null)"}
+						    {if condition = "($Think.get.where eq 0) or ($Think.get.where eq null)"}
 							<td>你还没有待解决的提问</td>
 							{/if}
-							{if condition = "($_GET['where'] eq 1)"}
+							{if condition = "($Think.get.where eq 1)"}
 							<td>你还没有已解决的提问</td>
 							{/if}
 						</tr>
@@ -61,7 +61,7 @@
 								<td class='t3'>{$Ask.time|date="Y-m-d",###}</td>
 							</tr>
 						{/volist}
-					</if>
+					{/if}
 				</table>
 				<div class="page">
 					{$Page}

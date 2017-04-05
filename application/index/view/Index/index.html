@@ -13,10 +13,10 @@
 				{volist name="allcate" id="allcate"}
 				<li class='list-l1'>
 					<div class='list-l1-wrap'>
-						<h4><a href="{:url('List/index',['cid'=>$allcate['cid']])}">{$allcate.title}</a></h4>
+						<h4><a href="{:url('Lists/index',['cid'=>$allcate['cid']])}">{$allcate.title}</a></h4>
 						<ul class='list-l2'>
 							{volist name="allcate['down']" id="down" offset="0" length="3"}
-							<li><a href="{:url('List/index',['cid'=>$down['cid']])}">{$down.title}</a></li>
+							<li><a href="{:url('Lists/index',['cid'=>$down['cid']])}">{$down.title}</a></li>
 							{/volist}
 						</ul>
 					</div>
@@ -24,7 +24,7 @@
 					<div class='list-more hidden'>
 						<ul>
 							{volist name="allcate['down']" id="down" offset="3"}
-							<li><a href="{:url('List/index',['cid'=>$down['cid']])}">{$down.title}</a></li>
+							<li><a href="{:url('Lists/index',['cid'=>$down['cid']])}">{$down.title}</a></li>
 							{/volist}
 						</ul>
 					</div>

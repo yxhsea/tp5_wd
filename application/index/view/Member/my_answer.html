@@ -32,17 +32,17 @@
 		<div id='right'>
 			<p class='title'>{$rank}的回答</p>
 			<ul class='ask-filter'>
-				<li <if condition = "$_GET['where'] eq null">class='cur'</if>><a href="{:url('Member/my_answer',['uid'=>$Think.get.uid}])}">全部回答</a></li>
-				<li <if condition = "$_GET['where'] eq 1">class='cur'</if>><a href="{:url('Member/my_answer',['uid'=>$Think.get.uid,'where'=>1])}">被采纳的回答</a></li>
+				<li {if condition = "$Think.get.where eq null"}class='cur'{/if}><a href="{:url('Member/my_answer',['uid'=>$uid])})}">全部回答</a></li>
+				<li {if condition = "$Think.get.where eq 1"}class='cur'{/if}><a href="{:url('Member/my_answer',['uid'=>$uid,'where'=>1])}">被采纳的回答</a></li>
 			</ul>
 			<div class='list list-filter'>
 				<table>
 						{if condition = "count($showAnswer) eq 0"}
 							<tr height='140'>
-							{if condition = "$_GET['where'] eq null"}
+							{if condition = "$Think.get.where eq null"}
 								<td>{$rank}还没有回答过问题</td>
 							{/if}
-							{if condition = "$_GET['where'] eq 1"}
+							{if condition = "$Think.get.where eq 1"}
 								<td>{$rank}还没有被采纳的回答</td>
 							{/if}
 							</tr>
@@ -64,7 +64,7 @@
 						{/if}
 				</table>
 				<div class="page">
-					{$Page}
+
 				</div>
 			</div>
 		</div>
