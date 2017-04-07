@@ -25,7 +25,7 @@
 				<ul>
 					{volist name="sonCate" id="sonCate"}
 						<li>
-							<a href="{:url('List/index',['cid'=>$sonCate['cid']])}">{$sonCate.title}</a>
+							<a href="{:url('Lists/index',['cid'=>$sonCate['cid']])}">{$sonCate.title}</a>
 						</li>
 					{/volist}
 				</ul>
@@ -64,7 +64,7 @@
 						{/volist}
 					<tr class='page'>
 						<td colspan='3'>
-							{$page}
+
 						</td>
 					</tr>
 				</table>

@@ -10,21 +10,22 @@ namespace app\index\controller;
 use think\Controller;
 use think\Db;
 use think\Request;
+use think\Session;
 
 //登录控制器
 class Login extends Common{
     //ajax异步登录验证
     public function ajax_login(){
-        if(!IS_AJAX){
+        if(!Request()->isAjax()){
             $this->error('页面不存在');
         }
-        $username = Request::instance()->post('username');
-        $pwd = md5(Request::instance()->post('pwd'));
+        $username = Request::instance()->param('username');
+        $pwd = md5(Request::instance()->param('pwd'));
 
         $passwd = db::name('user')->where(array('username'=>$username))->field('passwd')->find();
         //$passwd = M('user')->where(array('username'=>$username))->getField('passwd');
 
-        if($pwd != $passwd){
+        if($pwd != $passwd['passwd']){
             echo 0;
         }else{
             echo 1;
@@ -33,11 +34,11 @@ class Login extends Common{
 
     //登录
     public function login(){
-        if(!IS_POST){
+        if(!Request()->isPost()){
             $this->error('页面不存在');
         }
-        $username = Request::instance()->post('username');
-        $pwd = md5(Request::instance()->post('pwd'));
+        $username = Request::instance()->param('username');
+        $pwd = md5(Request::instance()->param('pwd'));
 
         $user = db::name('user')->where(array('username'=>$username))->field('passwd,lock,uid')->find();
         //$user = M('user')->where(array('username'=>$username))->field('passwd,lock,uid')->find();
@@ -58,24 +59,24 @@ class Login extends Common{
         //登录信息
         $loginData = array(
             'logintime' => time(),
-            'loginip'	=> get_client_ip()
+            'loginip'	=> Request::instance()->ip()
         );
 
         db::name('user')->where(array('uid' => $user['uid']))->update($loginData);
         //M('user')->where(array('uid' => $user['uid']))->save($loginData);
 
-        $auto = Request::instance()->post('auto');
+        $auto = Request::instance()->param('auto');
 
         if($auto == 'on'){
             setcookie(session_name(),session_id(),time()+3600*24,'/');
         }
-        Request::instance()->session('username',$username);
         //session('username',$username);
+        Session::set('username',$username);
 
-        Request::instance()->session('uid',$user['uid']);
         //session('uid',$user['uid']);
+        Session::set('uid',$user['uid']);
 
-        $this->success('登录成功');
+        return $this->success('登录成功');
     }
 
     //每天登录增加经验

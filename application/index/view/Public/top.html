@@ -5,14 +5,14 @@
 			<li><a href="http://www.sky31.com/" target='_blank'>湘潭大学三翼校园</a></li>
 		</ul>
 		<ul class='top-bar-right fr'>
-			{if condition="isset($_SESSION['username'])&&isset($_SESSION['uid'])"}
+			{if condition="!empty($Think.session.username) && !empty($Think.session.uid)"}
 	 			<li class='userinfo'>
 					<a href="{:url('Member/index',['uid'=>$Think.session.uid])}" class='uname'>{$Think.session.username}</a>
 				</li>
 				<li style='color:#eaeaf1'>|</li>
 				<li><a href="{:url('Login/out')}">退出</a></li>
 			{else/}
-				<li><a href="" class='login'>登录</a></li>
+				<li><a href="" class='login'>登录{$Think.session.username}</a></li>
 				<li style='color:#eaeaf1'>|</li>
 				<li><a href="" class='register'>注册</a></li>	
 			{/if}
@@ -84,7 +84,7 @@
 						<li>
 							<label for="reg-verify">验证码</label>
 							<input type="text" name='verify' id='reg-verify'/>
-							<img src="{:url('Reg/code')}" width='99' height='35' alt="验证码" id='verify-img' onclick="this.src='{:url('Reg/code')}?code='+Math.random();"/>
+							<img src="{:captcha_src()}" width='99' height='35' alt="验证码" id='verify-img' onclick="this.src='{:captcha_src()}?code='+Math.random();"/>
 							<span>请输入图中的字母或数字，不区分大小写</span>
 						</li>
 						<li class='submit'>
@@ -130,3 +130,11 @@
 	</div>
 
 <!--背景遮罩--><div id='background' class='hidden'></div>
+<script type="text/javascript">
+	//定义一个全局变量
+	var GV = {
+		'reg_code' : "{:url('Reg/ajax_code')}",
+		'reg_username' : "{:url('Reg/ajax_username')}",
+		'login'    : "{:url('Login/ajax_login')}"
+	};
+</script>

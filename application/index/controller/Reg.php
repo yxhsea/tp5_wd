@@ -17,10 +17,10 @@ use think\Request;
 class Reg extends Common{
     //异步检测用户名
     public function ajax_username(){
-        if(!IS_AJAX){
+        if(!Request()->isAjax()){
             $this->error('页面不存在');
         }
-        $username = Request::instance()->post('username');
+        $username = Request::instance()->param('username');
 
         if(db::name('user')->where(array('username'=>$username))->field('uid')->find()){
             echo 0;
@@ -29,28 +29,15 @@ class Reg extends Common{
         }
     }
 
-    //验证码
-    public function code(){
-        $config = array(
-            'fontSize' => 14,
-            'length' => 4,
-            'imageW' => 99,
-            'imageH' => 35,
-            'useNoise' => false
-        );
-        $verify = new \Think\Verify($config);
-        $verify->entry();
-    }
-
     //判断验证码
     public function ajax_code(){
-        if(!IS_AJAX){
+        if(!Request()->isAjax()){
             $this->error('页面不存在');
         }
-        $verify = new \Think\Verify();
-        $code = Request::instance()->post('verify');
 
-        if(!$verify->check($code)){
+        $captcha = Request::instance()->param('verify');
+
+        if(!captcha_check($captcha)){
             echo 0;
         }else{
             echo 1;
@@ -59,15 +46,15 @@ class Reg extends Common{
 
     //注册
     public function register(){
-        if(!IS_POST){
+        if(!Request()->isPost()){
             $this->error('页面不存在');
         }
         $data = array(
-            'username' => Request::instance()->post('username'),
-            'passwd'   => md5(Request::instance()->post('pwd')),
+            'username' => Request::instance()->param('username'),
+            'passwd'   => md5(Request::instance()->param('pwd')),
             'restime'  => time()
         );
-        if(db::name('user')->update($data)){
+        if(db::name('user')->insert($data)){
             $this->success('注册成功');
         }else{
             $this->error('注册失败');

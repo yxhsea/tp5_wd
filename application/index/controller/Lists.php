@@ -33,14 +33,15 @@ class Lists extends Common{
         if(empty($sonCate)){
             $pid = db::name('category')->where(['cid'=>$cid])->field('pid')->find();
             //$pid = M('category')->where(array('cid'=>$cid))->getField('pid');
-            $cid = $pid;
-            $sonCate = db::name('category')->where(['pid'=>$pid])->select();
+            $cid = $pid['pid'];
+            $sonCate = db::name('category')->where(['pid'=>$pid['pid']])->select();
             //$sonCate = M('category')->where(array('pid'=>$pid))->select();
         }
         $this->assign('sonCate',$sonCate);
 
 
         $where = Request::instance()->param('where');
+
         //$where = I('get.where');
         if(isset($where) && $where < 4){
             $condition = $where;
@@ -65,7 +66,7 @@ class Lists extends Common{
             $where['a.cid'] = $cid;
         }
         //$field = 'reward,content,answer,time,asid,wd_ask.cid';
-        $Cask = db::name('ask')->alias('a')->join('wd_category c','a.cid = c.cid')->where($where)->select();
+        //$Cask = db::name('ask')->alias('a')->join('wd_category c','a.cid = c.cid')->where($where)->select();
         //$Cask = D('ask')->relation('Category')->where($where)->select();
         //数据分页
         //$count = count($Cask);
@@ -75,10 +76,10 @@ class Lists extends Common{
         //$ask = D('ask')->relation('Category')->where($where)->order('time desc')->limit($Page->firstRow.','.$Page->listRows)->select();
 
         // 获取分页显示
-        $show = $ask->render();
+        //$show = $ask->render();
 
         $this->assign('ask',$ask);
-        $this->assign('page',$show);
+        //$this->assign('page',$show);
 
         return $this->fetch();
         //$this->display();
